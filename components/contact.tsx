@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -43,164 +43,86 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative py-20 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-accent/5 to-primary/5" />
-      <div className="absolute top-1/4 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center space-y-4 mb-16">
-          <p className="text-accent font-semibold text-lg">HUBUNGI KAMI</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            <span className="text-foreground">Mari Berkolaborasi</span>
-            <br />
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Untuk Kesuksesan Bersama
-            </span>
-          </h2>
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-foreground">Hubungi Kami</h2>
+          <p className="text-foreground/70 mt-4 max-w-2xl">
+            Tim kami siap membantu Anda. Hubungi kami melalui berbagai saluran komunikasi di bawah.
+          </p>
         </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Hubungi kami untuk mendiskusikan kebutuhan manufaktur Anda. Tim kami siap memberikan solusi terbaik.
-            </p>
-
-            {/* Contact Cards */}
-            <div className="space-y-4">
-              {contactInfo.map((info, idx) => {
-                const Icon = info.icon;
-                return (
-                  <a
-                    key={idx}
-                    href={info.href}
-                    className="group flex items-start gap-4 p-6 rounded-xl bg-white dark:bg-slate-800 border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {info.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mt-1">{info.value}</p>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-
-            {/* Social Links */}
-            <div className="pt-8 border-t border-border">
-              <p className="text-sm font-semibold text-foreground mb-4">Ikuti Kami</p>
-              <div className="flex gap-4">
-                {[
-                  { name: 'LinkedIn', url: '#' },
-                  { name: 'Twitter', url: '#' },
-                  { name: 'Instagram', url: '#' },
-                ].map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    className="w-10 h-10 rounded-lg bg-white dark:bg-slate-800 border border-border hover:bg-primary/10 hover:border-primary/50 flex items-center justify-center text-foreground hover:text-primary transition-all duration-300"
-                    title={social.name}
-                  >
-                    {social.name.charAt(0)}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl opacity-30" />
-            <form
-              onSubmit={handleSubmit}
-              className="relative bg-white dark:bg-slate-800 rounded-2xl border border-border p-8 md:p-10 space-y-6 hover:border-primary/30 transition-all duration-300"
-            >
-              {/* Success Message */}
-              {submitted && (
-                <div className="absolute inset-0 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center z-20 animate-in fade-in">
-                  <div className="text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center mx-auto">
-                      <CheckCircle className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground">Terima Kasih!</h3>
-                    <p className="text-muted-foreground">Kami akan segera menghubungi Anda.</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Nama Lengkap</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="John Doe"
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white/50 dark:bg-slate-900/50 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
-                  required
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Email</label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="john@example.com"
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white/50 dark:bg-slate-900/50 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
-                  required
-                />
-              </div>
-
-              {/* Phone */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Nomor Telepon</label>
-                <input
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+62 8XX XXXX XXXX"
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white/50 dark:bg-slate-900/50 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
-                  required
-                />
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Pesan</label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Ceritakan kebutuhan Anda..."
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white/50 dark:bg-slate-900/50 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none"
-                  required
-                />
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 group"
+        {/* Contact Info Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {contactInfo.map((info, idx) => {
+            const Icon = info.icon;
+            return (
+              <a
+                key={idx}
+                href={info.href}
+                className="bg-white p-6 rounded-lg border border-border hover:shadow-lg transition-shadow"
               >
-                <span>Kirim Pesan</span>
-                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                  <Icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-bold text-foreground mb-1">{info.title}</h3>
+                <p className="text-foreground/70 text-sm">{info.value}</p>
+              </a>
+            );
+          })}
+        </div>
 
-              {/* Privacy note */}
-              <p className="text-xs text-muted-foreground text-center">
-                Kami menghormati privasi Anda. Data Anda tidak akan dibagikan.
-              </p>
-            </form>
-          </div>
+        {/* Simple Contact Form */}
+        <div className="bg-white border border-border rounded-lg p-8 max-w-2xl">
+          <h3 className="text-2xl font-bold text-foreground mb-6">Kirim Pesan Langsung</h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Nama Anda"
+                className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                required
+              />
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Email Anda"
+                className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                required
+              />
+            </div>
+            <input
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              placeholder="Nomor Telepon"
+              className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+              required
+            />
+            <textarea
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              placeholder="Pesan Anda..."
+              rows={4}
+              className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full px-6 py-3 bg-primary text-white rounded font-bold hover:bg-green-700 transition-colors"
+            >
+              Kirim Pesan
+            </button>
+          </form>
+          {submitted && (
+            <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 text-center font-semibold">
+              Terima kasih! Kami akan segera menghubungi Anda.
+            </div>
+          )}
         </div>
       </div>
     </section>
