@@ -1,19 +1,29 @@
-import { Navbar } from '@/components/navbar';
-import { Hero } from '@/components/hero';
-import { About } from '@/components/about';
-import { Services } from '@/components/services';
-import { Contact } from '@/components/contact';
-import { Footer } from '@/components/footer';
+import { Navbar } from '@/components/navbar'
+import { Hero } from '@/components/hero'
+import { Marquee } from '@/components/marquee'
+import { About } from '@/components/about'
+import { Stats } from '@/components/stats'
+import { Products } from '@/components/products'
+import { Process } from '@/components/process'
+import { Technology } from '@/components/technology'
+import { Values } from '@/components/values'
+import { Contact } from '@/components/contact'
+import { Footer } from '@/components/footer'
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="relative overflow-x-hidden bg-background">
       <Navbar />
       <Hero />
+      <Marquee />
       <About />
-      <Services />
+      <Stats />
+      <Products />
+      <Process />
+      <Technology />
+      <Values />
       <Contact />
       <Footer />
     </main>
-  );
+  )
 }

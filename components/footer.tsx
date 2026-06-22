@@ -1,60 +1,92 @@
-'use client';
+'use client'
+
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import { Leaf } from 'lucide-react'
+import { nav, company } from '@/lib/site-data'
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end end'],
+  })
+  const y = useTransform(scrollYProgress, [0, 1], [60, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [0.4, 1])
 
   return (
-    <footer className="bg-primary text-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
-          {/* Brand */}
+    <footer ref={ref} className="bg-foreground text-background">
+      <div className="mx-auto max-w-6xl px-5 pt-20 pb-10">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
           <div>
-            <h3 className="font-bold text-lg mb-4">PT Manufaktur</h3>
-            <p className="text-white/80 text-sm">
-              Solusi manufaktur terpadu untuk pertumbuhan Indonesia berkelanjutan.
+            <div className="flex items-center gap-2.5">
+              <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <Leaf className="size-4" strokeWidth={2.2} />
+              </span>
+              <span className="font-heading text-lg font-semibold">
+                {company.name}
+              </span>
+            </div>
+            <p className="mt-5 max-w-sm text-pretty leading-relaxed text-background/60">
+              Produsen tepung tapioka premium dari singkong pilihan Lampung,
+              melayani kebutuhan pangan dan industri sejak {company.founded}.
             </p>
           </div>
 
-          {/* Company */}
           <div>
-            <h4 className="font-bold mb-4">Perusahaan</h4>
-            <ul className="space-y-2 text-sm text-white/80">
-              <li><a href="#about" className="hover:text-white transition">Tentang Kami</a></li>
-              <li><a href="#divisions" className="hover:text-white transition">Divisi</a></li>
-              <li><a href="#news" className="hover:text-white transition">Berita</a></li>
-              <li><a href="#careers" className="hover:text-white transition">Karir</a></li>
+            <p className="text-xs uppercase tracking-[0.2em] text-background/40">
+              Navigasi
+            </p>
+            <ul className="mt-4 flex flex-col gap-3">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="text-background/70 transition-colors hover:text-background"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="font-bold mb-4">Layanan</h4>
-            <ul className="space-y-2 text-sm text-white/80">
-              <li><a href="#" className="hover:text-white transition">Manufaktur</a></li>
-              <li><a href="#" className="hover:text-white transition">Distribusi</a></li>
-              <li><a href="#" className="hover:text-white transition">Teknologi</a></li>
-              <li><a href="#" className="hover:text-white transition">Layanan</a></li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="font-bold mb-4">Hubungi Kami</h4>
-            <ul className="space-y-2 text-sm text-white/80">
-              <li><a href="mailto:info@manufaktur.id" className="hover:text-white transition">info@manufaktur.id</a></li>
-              <li><a href="tel:+622112345678" className="hover:text-white transition">+62 21 1234 5678</a></li>
-              <li>Jakarta, Indonesia</li>
+            <p className="text-xs uppercase tracking-[0.2em] text-background/40">
+              Kontak
+            </p>
+            <ul className="mt-4 flex flex-col gap-3 text-background/70">
+              <li>{company.address}</li>
+              <li>
+                <a
+                  href={`mailto:${company.email}`}
+                  className="transition-colors hover:text-background"
+                >
+                  {company.email}
+                </a>
+              </li>
+              <li>{company.phone}</li>
             </ul>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-white/20 pt-8">
-          <p className="text-center text-white/70 text-sm">
-            &copy; {currentYear} PT Manufaktur Indonesia. Semua hak dilindungi.
+        <div className="mt-16 overflow-hidden">
+          <motion.p
+            style={{ y, opacity }}
+            className="font-heading text-[clamp(2.5rem,13vw,11rem)] font-medium leading-[0.85] tracking-tight text-background"
+          >
+            Bukit Kencana Mas
+          </motion.p>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-2 border-t border-background/15 pt-6 text-sm text-background/50 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} {company.name}. Seluruh hak cipta
+            dilindungi.
           </p>
+          <p>{company.location}</p>
         </div>
       </div>
     </footer>
-  );
+  )
 }
