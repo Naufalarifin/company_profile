@@ -46,9 +46,9 @@ export function Hero() {
           Bandar Lampung · Sejak 2013
         </motion.div>
 
-        <h1 className="max-w-4xl font-heading text-[clamp(2.6rem,8vw,6rem)] font-medium leading-[0.98] tracking-tight text-background">
+        <h1 className="max-w-4xl font-heading text-[clamp(2.6rem,8vw,6rem)] font-medium leading-[1.08] tracking-tight text-background">
           {word.map((w, i) => (
-            <span key={i} className="inline-block overflow-hidden align-bottom">
+            <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.15em]">
               <motion.span
                 className="inline-block"
                 initial={{ y: '110%' }}

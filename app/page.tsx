@@ -1,6 +1,5 @@
 import { Navbar } from '@/components/navbar'
 import { Hero } from '@/components/hero'
-import { Marquee } from '@/components/marquee'
 import { About } from '@/components/about'
 import { Stats } from '@/components/stats'
 import { Products } from '@/components/products'
@@ -15,7 +14,6 @@ export default function Page() {
     <main className="relative overflow-x-hidden bg-background">
       <Navbar />
       <Hero />
-      <Marquee />
       <About />
       <Stats />
       <Products />
